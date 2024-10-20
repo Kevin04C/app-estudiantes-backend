@@ -11,6 +11,7 @@ const userRoutes = require('./routes/userRoutes')
 const cursoRoutes = require('./routes/cursoRoutes')
 const todoRoutes = require('./routes/todoRoutes')
 const historicoBusquedaRoutes = require('./routes/historicoBusquedaRoutes')
+const conciertosRoutes = require('./routes/conciertosRoutes')
 const unknownEndpoint = require('./middlewares/unknownEndpoint')
 const errorHandler = require('./middlewares/errorHandler')
 
@@ -20,10 +21,11 @@ const PORT = process.env.PORT
 app.use(cors())
 app.use(express.json())
 app.use(helmet())
-// KEVIN ES CHIVO
+
 app.use('/api', userRoutes)
 app.use('/api/course', cursoRoutes)
 app.use('/api/to-do', todoRoutes)
+app.use('/api/conciertos', conciertosRoutes)
 app.use('/api/historical/search', historicoBusquedaRoutes)
 app.use('/api/documentation', swaggerUI.serve, swaggerUI.setup(docs))
 app.use(unknownEndpoint)
