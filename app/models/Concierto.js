@@ -45,7 +45,7 @@ const conciertoSchema = new Schema({
 const Concierto = model("Concierto", conciertoSchema);
 
 
-const obtenerConciertos = () => {
+const getConciertos = () => {
   return Concierto.find();
 }
 
