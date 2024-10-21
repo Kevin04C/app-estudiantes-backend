@@ -49,4 +49,4 @@ const getConciertos = () => {
   return Concierto.find();
 }
 
-module.exports = { obtenerConciertos }
+module.exports = { getConciertos }
