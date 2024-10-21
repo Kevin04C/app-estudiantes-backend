@@ -46,4 +46,15 @@ const guardarBusquedaValidator = [
   body('text').trim().not().isEmpty().isString().withMessage('Invalid search')
 ]
 
-module.exports = { registroValidator, cursoValidator, loginValidator, todoValidator, modificarUsuarioValidator, guardarBusquedaValidator }
+const requestMessageGptValidator = [
+  body('contentMessage').not().isEmpty().withMessage("El mensaje es requerido")
+]
+
+module.exports = { registroValidator, 
+  cursoValidator, 
+  loginValidator, 
+  todoValidator, 
+  modificarUsuarioValidator, 
+  guardarBusquedaValidator,
+  requestMessageGptValidator
+}
