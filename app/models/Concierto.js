@@ -45,8 +45,9 @@ const conciertoSchema = new Schema({
 const Concierto = model("Concierto", conciertoSchema);
 
 
-const getConciertos = () => {
-  return Concierto.find();
+const getConciertos = async () => {
+  const conciertos = Concierto.find();
+  return conciertos;
 }
 
 module.exports = { getConciertos }
