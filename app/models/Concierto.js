@@ -42,11 +42,11 @@ const conciertoSchema = new Schema({
   language: { type: String },
 });
 
-const Concierto = model("Concierto", conciertoSchema);
+const Concierto = model("Concierto", conciertoSchema, "conciertos");
 
 
 const getConciertos = async () => {
-  const conciertos = Concierto.find();
+  const conciertos = await Concierto.find();
   return conciertos;
 }
 
