@@ -1,3 +1,4 @@
+const { request } = require('express')
 const jwt = require('jsonwebtoken')
 
 const signToken = (userToken) => {
@@ -7,9 +8,17 @@ const signToken = (userToken) => {
   )
 }
 
-const verifyToken = (request) => {
+const verifyToken = (request = request) => {
   const authorization = request.headers.authorization?.toLowerCase().startsWith('bearer ')
-  const token = authorization ? request.headers.authorization?.split(' ')[1] : null
+
+  let token = authorization ? request.headers.authorization?.split(' ')[1] : null
+  
+  if(!token) {
+    if(request.query.token) {
+      token = request.query.token;
+    }
+  }
+
   const payload = validateToken(token)
   request.userName = payload.name
   request.userId = payload.id
