@@ -41,6 +41,24 @@ const sendForgotPasswordMail = async (user) => {
   }
 }
 
+const sendEmailChangedPassword = async (user) => {
+  try {
+    const mailOptions = ({
+      from: process.env.EMAIL_ACCOUNT,
+      to: user.email,
+      subject: 'SOLICITAR CAMBIAR CONTRASEÑA',
+      text: `¡Hola!, ${user.username}. para cambiar tu contraseña puedes hacerlo desde el siguiente enlace: <a href="http://${host}/auth/recover-password/?token=${user.security?.cryptoToken}">Cambiar contraseña</a>`
+    })
+
+    return await Transporter.sendMail(mailOptions)
+  } catch (error) {
+    console.log(error)
+    throw Error(error)
+  }
+}
+
+
+
 const sendChangedPasswordMail = async (user) => {
   try {
     const mailOptions = ({
@@ -57,4 +75,4 @@ const sendChangedPasswordMail = async (user) => {
   }
 }
 
-module.exports = { sendVerificationMail, sendForgotPasswordMail, sendChangedPasswordMail }
+module.exports = { sendVerificationMail, sendForgotPasswordMail, sendChangedPasswordMail, sendEmailChangedPassword }

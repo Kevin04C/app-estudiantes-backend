@@ -5,7 +5,7 @@ const { createResponse } = require('../utils/responseGenerator')
 const { signToken } = require('../utils/jwtOperations')
 const { uploadImage, deleteTempImage, deleteImageCloud } = require('../utils/imageManager')
 const { initUserSeguridad, verificarUser, buildForgotPassword, passwordReset } = require('../utils/verificationManager')
-const { sendVerificationMail, sendForgotPasswordMail, sendChangedPasswordMail } = require('../utils/emailTransporter')
+const { sendVerificationMail, sendForgotPasswordMail, sendChangedPasswordMail, sendEmailChangedPassword } = require('../utils/emailTransporter')
 const buildHostName = require('../utils/hostManager')
 
 const USER_ERROR = 'Error getting user'
@@ -271,10 +271,11 @@ const forgotPassword = async (req) => {
   userExists.security = buildForgotPassword(userExists)
 
   const userUpdated = await User.update(userExists._id, userExists)
-  await sendForgotPasswordMail(userUpdated)
+  // await sendForgotPasswordMail(userUpdated)
+  await sendEmailChangedPassword(userUpdated);
 
   data = {
-    msg: 'You have requested to change your password',
+    msg: 'Hemos enviado un correo para cambiar tu contraseña',
     id: userUpdated._id,
     cryptoToken: userUpdated.security?.cryptoToken
   }
