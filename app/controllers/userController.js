@@ -10,6 +10,7 @@ const registroUsuario = async (req, res, next) => {
     }
     res.status(statusCode).json(response)
   } catch (error) {
+    console.log(error);
     next(error)
   }
 }

@@ -27,9 +27,15 @@ const registroUsuario = async (req) => {
   const usernameExists = await User.find({ username })
   const emailExists = await User.find({ email })
 
-  if (usernameExists || emailExists) {
-    return createResponse(false, data, 'Invalid Email/Username', 400)
+  
+  if(usernameExists) {
+    return createResponse(false, data, 'Ya existe un usuario con ese nombre de usuario', 400)
   }
+
+  if(emailExists) {
+    return createResponse(false, data, 'Ya existe un usuario con ese correo', 400)
+  }
+
   const passwordHash = await bcrypt.hash(password, SALT_ROUNDS)
 
   const userData = req.body
