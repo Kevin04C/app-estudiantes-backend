@@ -28,7 +28,6 @@ app.use(express.json());
 app.use(helmet());
 
 const io = new SocketServer(server, {
-  transports: ['websocket'],
   cors: {
     origin: "*",
   }
