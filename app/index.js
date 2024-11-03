@@ -21,7 +21,7 @@ const errorHandler = require('./middlewares/errorHandler');
 const app = express();
 const server = http.createServer(app);
 
-const PORT = process.env.PORT || 4000; // Cambiado a 4000 para evitar conflictos con frontend
+const PORT = process.env.PORT || 4500; // Cambiado a 4000 para evitar conflictos con frontend
 
 app.use(cors());
 app.use(express.json());
@@ -30,8 +30,10 @@ app.use(helmet());
 const io = new SocketServer(server, {
   cors: {
     origin: "*",
-  }
+  },
 });
+
+
 
 app.use('/api', userRoutes);
 app.use('/api/course', cursoRoutes);
@@ -43,7 +45,6 @@ app.use('/api/documentation', swaggerUI.serve, swaggerUI.setup(docs));
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
-// Evento de conexión de Socket.IO
 io.on("connection", (socket) => {
   console.log("Cliente conectado");
 
